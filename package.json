@@ -4,7 +4,8 @@
   "description": "Expose job metadata as environment variables",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"no tests\" && exit 1"
+    "test": "mocha --recursive test",
+    "tdd": "mocha -w --recursive test"
   },
   "repository": {
     "type": "git",
@@ -18,11 +19,11 @@
   "strider": {
     "id": "metadata",
     "type": "job",
-    "title": "Environment",
+    "title": "Metadata",
     "worker": "worker.js",
     "webapp": "webapp.js",
     "config": {
-      "controller": "EnvironmentCtrl"
+      "controller": "MetadataCtrl"
     }
   },
   "dependencies": {

@@ -1,20 +1,22 @@
 <div id="metadata" class="tab-pane well">
   <fieldset>
-    <legend>Environment Variables</legend>
+    <legend>Metadata</legend>
     <p>
-      Expose strider job metadata as environment variables in your test runs.
+    Selectively expose job metadata from Strider as environment variables.
     </p>
     <table class="table">
       <thead>
         <tr>
           <th>Key</th>
           <th>Value</th>
+          <th>Preview</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="(key, value) in config">
           <td>[[ key ]]</td>
           <td>[[ value ]]</td>
+          <td>[[ preview(value) ]]</td>
           <td class="remove">
             <span class="clickable" ng-click="del(key)">
               <i class="icon-remove" alt="remove"></i>
@@ -22,11 +24,16 @@
           </td>
         </tr>
         <tr>
-          <td><input ng-model="newkey" placeholder="New Key"></td>
-          <td><input ng-model="newvalue" placeholder="New Value"></td>
-          <td><button ng-click="add()" class="btn btn-success">Add</button></td>
+          <td><input ng-model="newkey" placeholder="STRIDER_JOB_ID"></td>
+          <td><input ng-model="newvalue" placeholder="_id"></select><br>
+          <td>[[ preview(newvalue) ]]</td>
+          <td><button ng-click="add()" ng-if="valid()" class="btn btn-success">Add</button></td>
         </tr>
       </tbody>
     </table>
   </fieldset>
+  <span>The following is an example <b>job</b> object. Design access against it as environment variables above.<span>
+  <pre>
+  [[ exampleJSON ]]
+  </pre>
 </div>
