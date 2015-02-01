@@ -23,8 +23,35 @@ app.controller('MetadataCtrl', ['$scope', function ($scope) {
     }
   }
 
+  $scope.exampleJSON = JSON.stringify(example, null, 4);
 
-  var example = {
+  var deep_value = function(obj, path){
+    for (var i=0, path=path.split('.'), len=path.length; i<len; i++){
+      obj = obj[path[i]];
+    };
+    return obj;
+  };
+
+
+  $scope.convert = function (input) {
+    if (!input) return false;
+    var out = deep_value(example, input)
+    if (typeof out === "undefined") return '(not in sample data)';
+    return out;
+  };
+
+  $scope.valid = function () {
+    return $scope.newkey && $scope.newkey.length > 0 && $scope.convert($scope.newvalue)
+  };
+
+  $scope.preview = function (input) {
+    var out = $scope.convert(input)
+    if (out) return out;
+    else return "";
+  };
+}]);
+
+var example = {
   "__v": 0,
   "_id": "53e2e5d079c1eab0a100000f",
   "type": "TEST_AND_DEPLOY",
@@ -62,48 +89,48 @@ app.controller('MetadataCtrl', ['$scope', function ($scope) {
     },
     "branches": [
       {
-        "name": "master",
-        "pubkey": "",
-        "privkey": "",
-        "_id": "53e2a0aa5cc7484e8b00014c",
-        "runner": {
-          "id": "simple-runner",
-          "config": {
-            "pty": false
-          }
+      "name": "master",
+      "pubkey": "",
+      "privkey": "",
+      "_id": "53e2a0aa5cc7484e8b00014c",
+      "runner": {
+        "id": "simple-runner",
+        "config": {
+          "pty": false
+        }
+      },
+      "plugins": [
+        {
+        "id": "node",
+        "enabled": true,
+        "config": {
+          "globals": [],
+          "test": "npm test",
+          "caching": "loose",
+          "runtime": "whatever"
         },
-        "plugins": [
-          {
-            "id": "node",
-            "enabled": true,
-            "config": {
-              "globals": [],
-              "test": "npm test",
-              "caching": "loose",
-              "runtime": "whatever"
-            },
-            "_id": "53e2e5c779c1eab0a100000e",
-            "showStatus": true
-          },
-          {
-            "id": "metadata",
-            "enabled": true,
-            "_id": "53e2e5c779c1eab0a100000d",
-            "showStatus": true
-          }
-        ],
-        "deploy_on_green": true,
-        "mirror_master": false,
-        "active": true
+        "_id": "53e2e5c779c1eab0a100000e",
+        "showStatus": true
       },
       {
-        "name": "*",
-        "_id": "53e2a0aa5cc7484e8b00014b",
-        "plugins": [],
-        "deploy_on_green": true,
-        "mirror_master": true,
-        "active": true
+        "id": "metadata",
+        "enabled": true,
+        "_id": "53e2e5c779c1eab0a100000d",
+        "showStatus": true
       }
+      ],
+      "deploy_on_green": true,
+      "mirror_master": false,
+      "active": true
+    },
+    {
+      "name": "*",
+      "_id": "53e2a0aa5cc7484e8b00014b",
+      "plugins": [],
+      "deploy_on_green": true,
+      "mirror_master": true,
+      "active": true
+    }
     ],
     "prefetch_config": true,
     "public": false
@@ -156,31 +183,3 @@ app.controller('MetadataCtrl', ['$scope', function ($scope) {
   },
   "fromStriderJson": true
 };
-
-$scope.exampleJSON = JSON.stringify(example, null, 4);
-
-  var deep_value = function(obj, path){
-    for (var i=0, path=path.split('.'), len=path.length; i<len; i++){
-      obj = obj[path[i]];
-    };
-    return obj;
-  };
-
-
-  $scope.convert = function (input) {
-    if (!input) return false;
-    var out = deep_value(example, input)
-    if (typeof out === "undefined") return false;
-    return out;
-  };
-
-  $scope.valid = function () {
-    return $scope.newkey && $scope.newkey.length > 0 && $scope.convert($scope.newvalue)
-  };
-
-  $scope.preview = function (input) {
-    var out = $scope.convert(input)
-    if (out) return out;
-    else return "";
-  };
-}]);
