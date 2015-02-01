@@ -10,6 +10,7 @@
           <th>Key</th>
           <th>Value</th>
           <th>Preview</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -19,20 +20,20 @@
           <td>[[ preview(value) ]]</td>
           <td class="remove">
             <span class="clickable" ng-click="del(key)">
-              <i class="icon-remove" alt="remove"></i>
+              <i class="fa fa-times" style="color:red" alt="remove"></i>
             </span>
           </td>
         </tr>
         <tr>
           <td><input ng-model="newkey" placeholder="STRIDER_JOB_ID" type="text"></td>
-          <td><input ng-model="newvalue" placeholder="_id" type="text"><td>
+          <td><input ng-model="newvalue" placeholder="_id" type="text"></td>
           <td>[[ preview(newvalue) ]]</td>
           <td><button ng-click="add()" ng-if="valid()" class="btn btn-success">Add</button></td>
         </tr>
       </tbody>
     </table>
   </fieldset>
-  <span>The following is an example <b>job</b> object. Design access against it as environment variables above.<span>
+  <span>The following is an example <b>job</b> object that occurs when you click on "Manual Test". Design access against it as environment variables above. Note that webhook triggers can have a slightly different schema. You can always look at <b>job</b> objects in MongoDB.<span>
   <pre>
   [[ exampleJSON ]]
   </pre>
