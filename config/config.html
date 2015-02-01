@@ -10,6 +10,7 @@
           <th>Key</th>
           <th>Value</th>
           <th>Preview</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -25,7 +26,7 @@
         </tr>
         <tr>
           <td><input ng-model="newkey" placeholder="STRIDER_JOB_ID" type="text"></td>
-          <td><input ng-model="newvalue" placeholder="_id" type="text"><td>
+          <td><input ng-model="newvalue" placeholder="_id" type="text"></td>
           <td>[[ preview(newvalue) ]]</td>
           <td><button ng-click="add()" ng-if="valid()" class="btn btn-success">Add</button></td>
         </tr>
