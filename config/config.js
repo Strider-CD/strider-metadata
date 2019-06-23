@@ -34,20 +34,20 @@ app.controller('MetadataCtrl', ['$scope', function ($scope) {
 
 
   $scope.convert = function (input) {
-    if (!input) return false;
+    if (!input) return undefined;
     var out = deep_value(example, input)
-    if (typeof out === "undefined") return '(not in sample data)';
+    //if (typeof out === "undefined") return '(not in sample data)';
     return out;
   };
 
   $scope.valid = function () {
-    return $scope.newkey && $scope.newkey.length > 0 && $scope.convert($scope.newvalue)
+    return $scope.newkey && $scope.newkey.length > 0 && typeof $scope.convert($scope.newvalue) !== "undefined";
   };
 
   $scope.preview = function (input) {
-    var out = $scope.convert(input)
-    if (out) return out;
-    else return "";
+    var out = $scope.convert(input);
+    if (typeof out === "undefined") return '(not in sample data)';
+    return out;
   };
 }]);
 
