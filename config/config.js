@@ -36,7 +36,6 @@ app.controller('MetadataCtrl', ['$scope', function ($scope) {
   $scope.convert = function (input) {
     if (!input) return undefined;
     var out = deep_value(example, input)
-    //if (typeof out === "undefined") return '(not in sample data)';
     return out;
   };
 
